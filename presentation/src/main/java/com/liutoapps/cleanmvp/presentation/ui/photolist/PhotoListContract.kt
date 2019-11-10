@@ -9,9 +9,15 @@ interface PhotoListContract {
 
         fun showList(photoList: List<PhotoItem>)
 
+        fun navigateToDetails(photoItem: PhotoItem)
+
     }
 
-    interface Presenter : BasePresenter<View>
+    interface Presenter : BasePresenter<View> {
+
+        fun clickedPhotoItem(photoItem: PhotoItem)
+
+    }
 
 }
 

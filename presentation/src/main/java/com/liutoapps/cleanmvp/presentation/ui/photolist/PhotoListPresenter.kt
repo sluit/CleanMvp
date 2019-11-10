@@ -4,6 +4,7 @@ import android.util.Log
 import com.liutoapps.cleanmvp.domain.usecase.GetPhotosUseCase
 import com.liutoapps.cleanmvp.presentation.injector.Injector
 import com.liutoapps.cleanmvp.presentation.mapper.PhotoItemMapper
+import com.liutoapps.cleanmvp.presentation.model.PhotoItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -38,6 +39,11 @@ class PhotoListPresenter : PhotoListContract.Presenter {
 
     override fun onDetatch() {
         compositeDisposable.dispose()
+        view = null
+    }
+
+    override fun clickedPhotoItem(photoItem: PhotoItem) {
+        view?.navigateToDetails(photoItem)
     }
 
 }

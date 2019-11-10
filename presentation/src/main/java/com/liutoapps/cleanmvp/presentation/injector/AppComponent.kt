@@ -1,5 +1,6 @@
 package com.liutoapps.cleanmvp.presentation.injector
 
+import com.liutoapps.cleanmvp.presentation.ui.photodetail.PhotoDetailPresenter
 import com.liutoapps.cleanmvp.presentation.ui.photolist.PhotoListPresenter
 import dagger.Subcomponent
 import javax.inject.Singleton
@@ -9,5 +10,6 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(presenter: PhotoListPresenter)
+    fun inject(presenter: PhotoDetailPresenter)
 
 }

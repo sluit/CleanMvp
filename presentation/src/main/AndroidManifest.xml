@@ -21,6 +21,9 @@
         <activity android:name=".presentation.ui.photolist.PhotoListActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="sensorPortrait" />
+        <activity android:name=".presentation.ui.photodetail.PhotoDetailActivity"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="sensorPortrait" />
     </application>
 
 </manifest>

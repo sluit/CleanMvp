@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.liutoapps.cleanmvp.R
 import com.liutoapps.cleanmvp.presentation.model.PhotoItem
+import com.liutoapps.cleanmvp.presentation.ui.photodetail.PhotoDetailActivity
 import kotlinx.android.synthetic.main.activity_photo_list.*
 
-class PhotoListActivity : AppCompatActivity(), PhotoListContract.View {
+class PhotoListActivity : AppCompatActivity(), PhotoListContract.View, PhotoListItemView.OnPhotoClickListener {
 
     companion object {
         fun getIntent(context: Context): Intent {
@@ -18,7 +20,7 @@ class PhotoListActivity : AppCompatActivity(), PhotoListContract.View {
     }
 
     private var photoListPresenter: PhotoListPresenter? = null
-    private val photoListAdapter = PhotoListAdapter()
+    private val photoListAdapter = PhotoListAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +28,6 @@ class PhotoListActivity : AppCompatActivity(), PhotoListContract.View {
         toolbar?.let {
             setSupportActionBar(it)
         }
-
 
         setPresenter()
         setRecyclerView()
@@ -42,7 +43,22 @@ class PhotoListActivity : AppCompatActivity(), PhotoListContract.View {
         photo_list_recyclerview.adapter = photoListAdapter
     }
 
+    override fun onPhotoItemClicked(photoItem: PhotoItem) {
+        photoListPresenter?.clickedPhotoItem(photoItem)
+    }
+
+    //region presenter callbacks
     override fun showList(photoList: List<PhotoItem>) {
         photoListAdapter.setItems(photoList)
+    }
+
+    override fun navigateToDetails(photoItem: PhotoItem) {
+        startActivity(PhotoDetailActivity.getIntent(this, photoItem))
+    }
+    //endregion
+
+    override fun onDestroy() {
+        photoListPresenter?.onDetatch()
+        super.onDestroy()
     }
 }

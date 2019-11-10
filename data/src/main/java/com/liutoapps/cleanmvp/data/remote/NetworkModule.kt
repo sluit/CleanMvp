@@ -24,10 +24,10 @@ class NetworkModule {
     fun provideHttpClient(): OkHttpClient {
         val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
         val clientBuilder = OkHttpClient.Builder()
-        if (BuildConfig.DEBUG) {
-            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-            clientBuilder.addInterceptor(httpLoggingInterceptor)
-        }
+//        if (BuildConfig.DEBUG) {
+//            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+//            clientBuilder.addInterceptor(httpLoggingInterceptor)
+//        }
         clientBuilder.connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
         clientBuilder.writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
         clientBuilder.readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
@@ -45,5 +45,9 @@ class NetworkModule {
 
     @Provides
     fun providePhotosApi(retrofit: Retrofit): PhotosApi = retrofit.create(PhotosApi::class.java)
+
+    @Provides
+    fun provideCommentsApi(retrofit: Retrofit): CommentsApi = retrofit.create(CommentsApi::class.java)
+
 
 }
