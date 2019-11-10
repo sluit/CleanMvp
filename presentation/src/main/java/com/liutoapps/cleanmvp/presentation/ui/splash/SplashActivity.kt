@@ -1,4 +1,4 @@
-package com.liutoapps.cleanmvp.presentation.ui
+package com.liutoapps.cleanmvp.presentation.ui.splash
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

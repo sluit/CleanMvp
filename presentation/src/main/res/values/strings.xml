@@ -2,5 +2,6 @@
     <string name="app_name">Clean MVP</string>
 
     <!-- Content descriptions -->
-    <string name="image_android_robot_splash">Android Robot</string>
+    <string name="splash_image_android_robot">Android robot</string>
+    <string name="list_item_photo_thumbnail">Photo thumbnail</string>
 </resources>

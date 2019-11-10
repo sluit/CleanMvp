@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.ui.SplashActivity"
+        <activity android:name=".presentation.ui.photolist.PhotoListActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="sensorPortrait">
             <intent-filter>

@@ -1,3 +1,11 @@
 package com.liutoapps.cleanmvp.presentation.injector
 
-object Injector
+object Injector {
+
+    lateinit var appComponent: AppComponent private set
+
+    fun initAppComponent(app: AppComponent) {
+        appComponent = app
+    }
+
+}

@@ -1,0 +1,16 @@
+package com.liutoapps.cleanmvp.presentation.ui.photolist
+
+import android.content.Context
+import android.util.AttributeSet
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.liutoapps.cleanmvp.presentation.model.PhotoItem
+import kotlinx.android.synthetic.main.list_item_photo.view.*
+
+class PhotoListItemView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    ConstraintLayout(context, attrs, defStyleAttr) {
+
+    fun setData(item: PhotoItem) {
+        item_photo_title.text = item.title
+    }
+
+}
