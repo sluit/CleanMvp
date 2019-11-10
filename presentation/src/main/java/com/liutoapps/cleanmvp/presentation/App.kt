@@ -1,7 +1,5 @@
 package com.liutoapps.cleanmvp.presentation
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 
-open class App : Application() {
-
-}
+open class App : MultiDexApplication()
