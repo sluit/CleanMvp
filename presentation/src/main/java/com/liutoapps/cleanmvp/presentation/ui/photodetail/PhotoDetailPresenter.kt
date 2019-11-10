@@ -48,13 +48,21 @@ class PhotoDetailPresenter : PhotoDetailContract.Presenter {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .map { commentItemMapper.mapToPresentation(it) }
-                    .subscribe({ view?.showComments(it)},
+                    .subscribe({
+                        view?.stopRefresh()
+                        view?.showComments(it)
+                    },
                         { t: Throwable? ->
+                            view?.stopRefresh()
                             Timber.e(t, "Something went wrong downloading the comments")
                         })
             )
         }
 
+    }
+
+    override fun refreshComments() {
+        getComments()
     }
 
     override fun backPressed(): Boolean {

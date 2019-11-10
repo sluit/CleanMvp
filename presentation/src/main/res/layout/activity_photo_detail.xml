@@ -49,16 +49,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="W,1:1"
         tools:srcCompat="@drawable/ic_android_robot_2014" />
-    
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/photo_detail_comments_recyclerview"
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/photo_detail_comments_swiperefresh"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photo_detail_image"
-        tools:listitem="@layout/list_item_photo" />
+        app:layout_constraintTop_toBottomOf="@+id/photo_detail_image">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/photo_detail_comments_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:listitem="@layout/list_item_photo" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

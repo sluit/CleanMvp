@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.liutoapps.cleanmvp.presentation.model.CommentItem
 import com.liutoapps.cleanmvp.presentation.model.PhotoItem
 import kotlinx.android.synthetic.main.activity_photo_detail.*
-import kotlinx.android.synthetic.main.activity_photo_list.toolbar
 import android.view.MenuItem
 import com.liutoapps.cleanmvp.R
 
@@ -45,6 +44,7 @@ class PhotoDetailActivity : AppCompatActivity(), PhotoDetailContract.View {
 
         setPresenter()
         setRecyclerView()
+        setSwipeRefresh()
     }
 
     private fun setPresenter() {
@@ -60,6 +60,12 @@ class PhotoDetailActivity : AppCompatActivity(), PhotoDetailContract.View {
     private fun setRecyclerView() {
         photo_detail_comments_recyclerview.layoutManager = LinearLayoutManager(this)
         photo_detail_comments_recyclerview.adapter = photoDetailCommentAdapter
+    }
+
+    private fun setSwipeRefresh() {
+        photo_detail_comments_swiperefresh.setOnRefreshListener {
+            photoDetailPresenter?.refreshComments()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -84,6 +90,10 @@ class PhotoDetailActivity : AppCompatActivity(), PhotoDetailContract.View {
 
     override fun closeDetails() {
         onBackPressed()
+    }
+
+    override fun stopRefresh() {
+        photo_detail_comments_swiperefresh.isRefreshing = false
     }
     //endregion
 }

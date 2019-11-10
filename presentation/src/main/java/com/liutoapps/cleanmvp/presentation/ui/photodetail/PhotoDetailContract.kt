@@ -14,11 +14,15 @@ interface PhotoDetailContract {
 
         fun closeDetails()
 
+        fun stopRefresh()
+
     }
 
     interface Presenter : BasePresenter<View> {
 
         fun setPhotoDetails(photo: PhotoItem)
+
+        fun refreshComments()
 
         fun backPressed(): Boolean
 
