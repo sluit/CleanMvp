@@ -7,7 +7,7 @@ interface PhotoListContract {
 
     interface View {
 
-        fun showList(photoList: ArrayList<PhotoItem>)
+        fun showList(photoList: List<PhotoItem>)
 
     }
 

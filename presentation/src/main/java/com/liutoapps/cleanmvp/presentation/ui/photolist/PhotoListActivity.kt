@@ -30,7 +30,7 @@ class PhotoListActivity : AppCompatActivity(), PhotoListContract.View {
         photo_list_recyclerview.adapter = photoListAdapter
     }
 
-    override fun showList(photoList: ArrayList<PhotoItem>) {
+    override fun showList(photoList: List<PhotoItem>) {
         photoListAdapter.setItems(photoList)
     }
 }

@@ -1,17 +1,18 @@
 package com.liutoapps.cleanmvp.presentation.ui.photolist
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.liutoapps.cleanmvp.R
 import com.liutoapps.cleanmvp.presentation.model.PhotoItem
 
 class PhotoListAdapter : RecyclerView.Adapter<PhotoListAdapter.ViewHolder>() {
 
     private var items: List<PhotoItem> = emptyList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.list_item_photo, parent, false))
 
     override fun getItemCount(): Int = items.size
 

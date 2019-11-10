@@ -8,5 +8,5 @@ import javax.inject.Inject
 class GetPhotosUseCase @Inject constructor(
     private val photoRepository: PhotoRepository
 ) {
-    fun get(): Single<List<Photo>> = photoRepository.getPhotos()
+    fun get(): Single<List<Photo>> = photoRepository.getPhotos().map { it.sortedBy { photo -> photo.title } }
 }
