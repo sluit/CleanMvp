@@ -15,11 +15,15 @@ interface PhotoListContract {
 
         fun navigateToDetails(photoItem: PhotoItem)
 
+        fun stopRefresh()
+
     }
 
     interface Presenter : BasePresenter<View> {
 
         fun clickedPhotoItem(photoItem: PhotoItem)
+
+        fun refresh()
 
     }
 

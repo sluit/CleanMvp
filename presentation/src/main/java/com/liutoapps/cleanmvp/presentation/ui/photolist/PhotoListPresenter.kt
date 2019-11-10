@@ -27,18 +27,24 @@ class PhotoListPresenter : PhotoListContract.Presenter {
         Injector.appComponent.inject(this)
         this.view = view
         view.showLoading(true)
+        loadData()
+    }
+
+    private fun loadData() {
         compositeDisposable.add(
             getPhotosUseCase.get()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { photoListMapper.mapToPresentation(it) }
                 .subscribe({
-                    view.showLoading(false)
-                    view.showList(it)
+                    view?.showLoading(false)
+                    view?.stopRefresh()
+                    view?.showList(it)
                 },
                     { t: Throwable? ->
-                        view.showLoading(false)
-                        view.showError()
+                        view?.showLoading(false)
+                        view?.stopRefresh()
+                        view?.showError()
                         Timber.e(t, "Something went wrong downloading the photos")
                     })
         )
@@ -51,6 +57,10 @@ class PhotoListPresenter : PhotoListContract.Presenter {
 
     override fun clickedPhotoItem(photoItem: PhotoItem) {
         view?.navigateToDetails(photoItem)
+    }
+
+    override fun refresh() {
+        loadData()
     }
 
 }

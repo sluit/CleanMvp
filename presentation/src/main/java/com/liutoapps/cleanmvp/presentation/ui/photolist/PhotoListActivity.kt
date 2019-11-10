@@ -31,6 +31,7 @@ class PhotoListActivity : AppCompatActivity(), PhotoListContract.View, PhotoList
 
         setPresenter()
         setRecyclerView()
+        setSwipeRefresh()
     }
 
     private fun setPresenter() {
@@ -41,6 +42,12 @@ class PhotoListActivity : AppCompatActivity(), PhotoListContract.View, PhotoList
     private fun setRecyclerView() {
         photo_list_recyclerview.layoutManager = LinearLayoutManager(this)
         photo_list_recyclerview.adapter = photoListAdapter
+    }
+
+    private fun setSwipeRefresh() {
+        photo_list_swiperefresh.setOnRefreshListener {
+            photoListPresenter?.refresh()
+        }
     }
 
     override fun onPhotoItemClicked(photoItem: PhotoItem) {
@@ -58,6 +65,7 @@ class PhotoListActivity : AppCompatActivity(), PhotoListContract.View, PhotoList
 
     override fun showError() {
         photo_list_error.visibility = View.VISIBLE
+        photo_list_recyclerview.visibility = View.GONE
     }
 
     override fun showList(photoList: List<PhotoItem>) {
@@ -68,6 +76,11 @@ class PhotoListActivity : AppCompatActivity(), PhotoListContract.View, PhotoList
     override fun navigateToDetails(photoItem: PhotoItem) {
         startActivity(PhotoDetailActivity.getIntent(this, photoItem))
     }
+
+    override fun stopRefresh() {
+        photo_list_swiperefresh.isRefreshing = false
+    }
+
     //endregion
 
     override fun onDestroy() {
