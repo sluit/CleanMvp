@@ -7,7 +7,9 @@ interface PhotoListContract {
 
     interface View {
 
-        fun setLoading(loading: Boolean)
+        fun showLoading(loading: Boolean)
+
+        fun showError()
 
         fun showList(photoList: List<PhotoItem>)
 

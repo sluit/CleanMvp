@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Clean MVP</string>
+    <string name="generic_error">Something went wrong</string>
 
     <!-- Content descriptions -->
     <string name="splash_image_android_robot">Android robot</string>

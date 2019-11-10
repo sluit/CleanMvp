@@ -8,6 +8,7 @@ import com.liutoapps.cleanmvp.presentation.model.PhotoItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 class PhotoListPresenter : PhotoListContract.Presenter {
@@ -25,19 +26,20 @@ class PhotoListPresenter : PhotoListContract.Presenter {
     override fun onAttach(view: PhotoListContract.View) {
         Injector.appComponent.inject(this)
         this.view = view
-        view.setLoading(true)
+        view.showLoading(true)
         compositeDisposable.add(
             getPhotosUseCase.get()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { photoListMapper.mapToPresentation(it) }
                 .subscribe({
-                    view.setLoading(false)
+                    view.showLoading(false)
                     view.showList(it)
                 },
                     { t: Throwable? ->
-                        view.setLoading(false)
-                        Log.e("TAG", "error", t)
+                        view.showLoading(false)
+                        view.showError()
+                        Timber.e(t, "Something went wrong downloading the photos")
                     })
         )
     }

@@ -8,6 +8,7 @@ import com.liutoapps.cleanmvp.presentation.model.PhotoItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 class PhotoDetailPresenter : PhotoDetailContract.Presenter {
@@ -49,7 +50,7 @@ class PhotoDetailPresenter : PhotoDetailContract.Presenter {
                     .map { commentItemMapper.mapToPresentation(it) }
                     .subscribe({ view?.showComments(it)},
                         { t: Throwable? ->
-                            Log.e("TAG", "error", t)
+                            Timber.e(t, "Something went wrong downloading the comments")
                         })
             )
         }
