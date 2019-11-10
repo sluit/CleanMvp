@@ -25,13 +25,18 @@ class PhotoListPresenter : PhotoListContract.Presenter {
     override fun onAttach(view: PhotoListContract.View) {
         Injector.appComponent.inject(this)
         this.view = view
+        view.setLoading(true)
         compositeDisposable.add(
             getPhotosUseCase.get()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { photoListMapper.mapToPresentation(it) }
-                .subscribe({ view.showList(it)},
+                .subscribe({
+                    view.setLoading(false)
+                    view.showList(it)
+                },
                     { t: Throwable? ->
+                        view.setLoading(false)
                         Log.e("TAG", "error", t)
                     })
         )

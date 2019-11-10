@@ -48,7 +48,16 @@ class PhotoListActivity : AppCompatActivity(), PhotoListContract.View, PhotoList
     }
 
     //region presenter callbacks
+    override fun setLoading(loading: Boolean) {
+        photo_list_loading.visibility = if (loading) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+    }
+
     override fun showList(photoList: List<PhotoItem>) {
+        photo_list_recyclerview.visibility = View.VISIBLE
         photoListAdapter.setItems(photoList)
     }
 

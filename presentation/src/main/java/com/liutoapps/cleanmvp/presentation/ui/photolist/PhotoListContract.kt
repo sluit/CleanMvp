@@ -7,6 +7,8 @@ interface PhotoListContract {
 
     interface View {
 
+        fun setLoading(loading: Boolean)
+
         fun showList(photoList: List<PhotoItem>)
 
         fun navigateToDetails(photoItem: PhotoItem)
